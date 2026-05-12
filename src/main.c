@@ -7,21 +7,33 @@
 #include <math.h>
 
 int main() {
-    // Create a 2D tensor
-    Tensor2D t = create_tensor(3, 3);   
+    // Create 2 tensors and perform some operations
+    Tensor2D t1 = create_tensor(2, 3);
+    Tensor2D t2 = create_tensor(2, 3);
 
-    // Fill the tensor with some values
-    fill_tensor(&t, 1.0f);
-    // Set specific values
-    set_value(&t, 0, 0, 2.0f);
-    set_value(&t, 1, 1, 3.0f);
-    // Print the tensor
-    printf("Tensor after filling and setting values:\n");
-    print_tensor(t);
+    // Fill the tensors with some values
+    tensor_fill(&t1, 1.0f);
+    tensor_fill_random(&t2, 1.0f);
+
+    // Print the tensors
+    printf("Tensor 1:\n");
+    print_tensor(t1);
+    printf("Tensor 2:\n");
+    print_tensor(t2);
+
+    // compare the tensors
+    if (tensor_compare(&t1, &t2, 0.0001f)) {
+        printf("Tensors are approximately equal.\n");
+    } else {
+        printf("Tensors are NOT equal.\n");
+    }
+
+
 
     //  Free the tensor memory
-    free_tensor(&t);
-    
+    free_tensor(&t1);
+    free_tensor(&t2);
+
 
     return 0;
 }
